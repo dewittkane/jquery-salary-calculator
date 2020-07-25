@@ -27,10 +27,7 @@ $(document).ready(function(){
             
 
             populateTable();
-            //resets the table with updated array
-
-            calculateMonthlyTotal();
-            //recalculates and appends monthly total
+            //resets the table with updated array and updates total
 
             $("#firstName").val('');
             $("#lastName").val('');
@@ -58,13 +55,16 @@ $(document).ready(function(){
             $('#empInfo').append(`<tr>
             <td>${employee.firstName}</td>
             <td>${employee.lastName}</td>
-            <td>${employee.idNum}</td>
+            <td class="id">${employee.idNum}</td>
             <td>${employee.jobTitle}</td>
             <td>${employee.annualSalary}</td>
             <td><button class="deleteMe">Delete</button></td>
             </tr>`)
             //loops to append new row for each emp in array
         };
+
+        calculateMonthlyTotal();
+        //calculates the total anytime the table is repopulated
     };
 
     function calculateMonthlyTotal() {
@@ -90,8 +90,22 @@ $(document).ready(function(){
     };
 
     function deleteRow() {
-        console.log('in delete row!');
-        $(this).parent().parent().remove()
-        //this will back up two steps from the button to delete the entire <tr>
+        //console.log('in delete row!');
+        let id = $(this).parent().parent().children('.id').text();
+        console.log(id);
+        //declares new variable with id of the row to be deleted
+        
+        for (let i = 0; i < employeeArray.length; i++ ) {
+            if(id === employeeArray[i].idNum) {
+                employeeArray.splice(i, 1)
+            };
+        };
+        console.log(employeeArray);
+        
+        //loops through array to match id number and deletes that entry if it matches
+
+        populateTable();
+        //repopulates table now that array is changed
+        
     }
 });
