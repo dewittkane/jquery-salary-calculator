@@ -66,10 +66,13 @@ $(document).ready(function(){
                     $('#empInfo').append(`<tr>
                     <td>${employee.firstName}</td>
                     <td>${employee.lastName}</td>
-                    <td class="id">${employee.idNum}</td>
-                    <td>${employee.jobTitle}</td>
-                    <td>${employee.annualSalary}</td>
-                    <td><button class="deleteMe">Delete</button></td>
+                    <td class="id">#${employee.idNum}</td>
+                    <td class="jobTitle">${employee.jobTitle}</td>
+                    <td>$${employee.annualSalary}</td>
+                    <td><svg width="1.2em" height="1.2em" viewBox="0 0 16 16" type="button" class="bi bi-trash deleteMe" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                  </svg></td>
                     </tr>`)
                     //loops to append new row for each employee in array
                 };
@@ -93,10 +96,10 @@ $(document).ready(function(){
         $('#monthlyExp').append(`$ ${monthlyTotal}`);
         //resets text to the monthly total
 
-        if (monthlyTotal>20000 && !$('#monthlyExp').hasClass('expenseThreshold')) {
-            $('#monthlyExp').addClass('expenseThreshold');
-        } else if (monthlyTotal<=20000 && $('#monthlyExp').hasClass('expenseThreshold')) {
-            $('#monthlyExp').removeClass('expenseThreshold');
+        if (monthlyTotal>20000 && !$('#total').hasClass('expenseThreshold')) {
+            $('#total').addClass('expenseThreshold');
+        } else if (monthlyTotal<=20000 && $('#total').hasClass('expenseThreshold')) {
+            $('#total').removeClass('expenseThreshold');
         }
         //checks if value is above 20000 and applies styling as warning
     };
@@ -108,8 +111,13 @@ $(document).ready(function(){
         //declares new variable with id of the row to be deleted
         
         for (let i = 0; i < employeeArray.length; i++ ) {
-            if(id === employeeArray[i].idNum) {
-                employeeArray.splice(i, 1)
+            if(id === `#${employeeArray[i].idNum}`) {
+
+                let r = confirm(`Are you sure you want to delete ${employeeArray[i].firstName} ${employeeArray[i].lastName} from the database?`)
+                if (r) {
+                    employeeArray.splice(i, 1)
+                };
+                //added confirmation for deletion
             };
         };
         console.log(employeeArray);
