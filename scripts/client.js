@@ -2,6 +2,8 @@ $(document).ready(function(){
 
     $('#submitBtn').on('click', submitInfo);
     //click listener for submit button
+    $('#empInfo').on('click', '.deleteMe', deleteRow);
+    //click listener for delete buttons that are generated
     
     let employeeArray = [];
     //empty employee array to generate to
@@ -71,11 +73,15 @@ $(document).ready(function(){
             annualTotal += Number(employee.annualSalary);
         };
         //loops to sum all annual salaries in array
-        
+
         $('#monthlyExp').empty();        
         $('#monthlyExp').append(parseInt(annualTotal / 12));
         //resets text to the monthly total
     };
 
-
+    function deleteRow() {
+        console.log('in delete row!');
+        $(this).parent().parent().remove()
+        //this will back up two steps from the button to delete the entire <tr>
+    }
 });
