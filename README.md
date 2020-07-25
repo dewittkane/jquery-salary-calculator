@@ -8,8 +8,8 @@ Using the DOM we can display the backend array of stored employee objects.  It c
 
 ## Screenshot
 
-![Screenshot 1](images/Sample 01.png)
-![Screenshot 2](images/Sample 02.png)
+![Screenshot 1](images/Sample01.png)
+![Screenshot 2](images/Sample02.png)
 
 ## Built With
 - Javascript
