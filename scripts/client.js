@@ -1,14 +1,10 @@
 $(document).ready(function(){
 
     $('#submitBtn').on('click', submitInfo);
-    // click listener for submit button
+    //click listener for submit button
     
-    let employeesArray = [];
+    let employeeArray = [];
     //empty employee array to generate to
-
-
-
-
 
     function submitInfo() {
         if($("#firstName").val() && $("#lastName").val() && $("#idNum").val() && $("#jobTitle").val() && $("#annualSalary").val()) {
@@ -23,23 +19,63 @@ $(document).ready(function(){
             };
             //declares object with input values
 
-            employeesArray.push(employee);
+            employeeArray.push(employee);
             //pushes new employee to backend "database"
+            console.log(employeeArray);
+            
 
             populateTable();
+            //resets the table with updated array
+
+            calculateMonthlyTotal();
+            //recalculates and appends monthly total
+
+            $("#firstName").val('');
+            $("#lastName").val('');
+            $("#idNum").val('');
+            $("#jobTitle").val('');
+            $("#annualSalary").val('');
+            //resets input fields
             
         } else {
             alert('Please fill all fields!');
             //lets user know all fields must be filled
+
             return false;
             //stops the function
+
         };
     };
 
 
+    function populateTable(){
+        $('#empInfo').empty();
+        //emptys the table
 
+        for (let employee of employeeArray) {
+            $('#empInfo').append(`<tr>
+            <td>${employee.firstName}</td>
+            <td>${employee.lastName}</td>
+            <td>${employee.idNum}</td>
+            <td>${employee.jobTitle}</td>
+            <td>${employee.annualSalary}</td>
+            <td><button class="deleteMe">Delete</button></td>
+            </tr>`)
+            //loops to append new row for each emp in array
+        };
+    };
 
-
+    function calculateMonthlyTotal() {
+        let annualTotal = 0;
+        for (let employee of employeeArray) {
+            annualTotal += Number(employee.annualSalary);
+        };
+        //loops to sum all annual salaries in array
+        
+        $('#monthlyExp').empty();        
+        $('#monthlyExp').append(parseInt(annualTotal / 12));
+        //resets text to the monthly total
+    };
 
 
 });

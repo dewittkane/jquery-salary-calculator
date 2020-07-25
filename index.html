@@ -21,10 +21,10 @@
         <h1>Salary Calculator</h1>
         <section id="addEmployeeSect">
             <h3>Add Employee</h3>
-            <input type="text" id="firstName" placeholder="First Name"/>
-            <input type="text" id="lastName" placeholder="Last Name"/>
-            <input type="number" id="idNum" placeholder="ID Number"/>
-            <input type="text" id="jobTitle" placeholder="Job Title"/>
+            <input value="DeWitt" type="text" id="firstName" placeholder="First Name"/>
+            <input value="Kane" type="text" id="lastName" placeholder="Last Name"/>
+            <input value="7204" type="number" id="idNum" placeholder="ID Number"/>
+            <input value="Chef" type="text" id="jobTitle" placeholder="Job Title"/>
             <input type="number" id="annualSalary" placeholder="Annual Salary"/>
             <button id="submitBtn">Submit</button>
         </section>
@@ -41,14 +41,9 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody class="empInfo">
+                <tbody id="empInfo">
                     <tr>
-                        <td>DeWitt</td>
-                        <td>Kane</td>
-                        <td>7204</td>
-                        <td>Culinary Operations Manager</td>
-                        <td>$100,000</td>
-                        <td><button>Delete</button></td>
+                        <td colspan="6" id="emptyDB">Your database is empty</td>
                     </tr>
                 </tbody>
                 
