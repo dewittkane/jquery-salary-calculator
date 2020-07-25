@@ -12,7 +12,7 @@ $(document).ready(function(){
         if($("#firstName").val() && $("#lastName").val() && $("#idNum").val() && $("#jobTitle").val() && $("#annualSalary").val()) {
         // checks that all fields have data, if so...
 
-            let employee = {
+            let newEmployee = {
                 firstName: $("#firstName").val(),
                 lastName: $("#lastName").val(),
                 idNum: $("#idNum").val(),
@@ -21,11 +21,18 @@ $(document).ready(function(){
             };
             //declares object with input values
 
-            employeeArray.push(employee);
-            //pushes new employee to backend "database"
-            console.log(employeeArray);
-            
+            for (let employee of employeeArray) {
+                if(employee.idNum === newEmployee.idNum) {
+                    alert('User ID already exists.  Please enter a unique ID number.');
+                    return false;
+                }
+            }
+            //ensures database has all unique ID numbers, this will prevent issues with accidentally deleting multiple rows
 
+            employeeArray.push(newEmployee);
+            console.log(employeeArray);
+            //pushes new employee to backend "database"
+            
             populateTable();
             //resets the table with updated array and updates total
 
@@ -37,7 +44,7 @@ $(document).ready(function(){
             //resets input fields
             
         } else {
-            alert('Please fill all fields!');
+            alert('Please fill in all fields!');
             //lets user know all fields must be filled
 
             return false;
@@ -50,18 +57,23 @@ $(document).ready(function(){
     function populateTable(){
         $('#empInfo').empty();
         //emptys the table
-
-        for (let employee of employeeArray) {
-            $('#empInfo').append(`<tr>
-            <td>${employee.firstName}</td>
-            <td>${employee.lastName}</td>
-            <td class="id">${employee.idNum}</td>
-            <td>${employee.jobTitle}</td>
-            <td>${employee.annualSalary}</td>
-            <td><button class="deleteMe">Delete</button></td>
-            </tr>`)
-            //loops to append new row for each emp in array
-        };
+        if (employeeArray.length === 0) {
+            $('#empInfo').append(`
+            <tr><td colspan="6" id="emptyDB">Your database is empty</td></tr>`)
+            //if the array is empty, adds placeholder info
+            } else {
+            for (let employee of employeeArray) {
+                    $('#empInfo').append(`<tr>
+                    <td>${employee.firstName}</td>
+                    <td>${employee.lastName}</td>
+                    <td class="id">${employee.idNum}</td>
+                    <td>${employee.jobTitle}</td>
+                    <td>${employee.annualSalary}</td>
+                    <td><button class="deleteMe">Delete</button></td>
+                    </tr>`)
+                    //loops to append new row for each employee in array
+                };
+            };
 
         calculateMonthlyTotal();
         //calculates the total anytime the table is repopulated
@@ -92,7 +104,7 @@ $(document).ready(function(){
     function deleteRow() {
         //console.log('in delete row!');
         let id = $(this).parent().parent().children('.id').text();
-        console.log(id);
+        console.log('id to be deleted is:' + id);
         //declares new variable with id of the row to be deleted
         
         for (let i = 0; i < employeeArray.length; i++ ) {
@@ -101,11 +113,9 @@ $(document).ready(function(){
             };
         };
         console.log(employeeArray);
-        
         //loops through array to match id number and deletes that entry if it matches
-
-        populateTable();
-        //repopulates table now that array is changed
         
-    }
+        populateTable();
+        //repopulates table now that array has changed
+    };
 });
