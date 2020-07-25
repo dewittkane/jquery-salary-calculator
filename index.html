@@ -27,10 +27,33 @@
             <input type="text" id="jobTitle" placeholder="Job Title"/>
             <input type="number" id="annualSalary" placeholder="Annual Salary"/>
             <button id="submitBtn">Submit</button>
-
-
         </section>
-        <section id="employeeTable">
+        <section id="employeeTableSect">
+            <h3>Employees</h3>
+            <table class="table table-hover table-bordered" id="employeeTable">
+                <thead class="thead-dark">
+                     <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>ID Number</th>
+                        <th>Job Title</th>
+                        <th>Annual Salary</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>DeWitt</td>
+                        <td>Kane</td>
+                        <td>7204</td>
+                        <td>Culinary Operations Manager</td>
+                        <td>$100,000</td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                </tbody>
+                
+                
+            </table>
 
         </section>
     </body>
