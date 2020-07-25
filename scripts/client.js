@@ -2,9 +2,13 @@ $(document).ready(function(){
 
     $('#submitBtn').on('click', submitInfo);
     //click listener for submit button
+
     $('#empInfo').on('click', '.deleteMe', deleteRow);
     //click listener for delete buttons that are generated
-    
+
+    $('#clearTable').on('click', clearTable);
+    //click listener for clear table button
+
     let employeeArray = [];
     //empty employee array to generate to
 
@@ -126,4 +130,12 @@ $(document).ready(function(){
         populateTable();
         //repopulates table now that array has changed
     };
+
+    function clearTable() {
+        let r = prompt(`Please type 'DELETE' to confirm you want to clear the database.  Warning: This cannot be undone.`)
+        if(r==='DELETE') {
+            employeeArray = [];
+            populateTable();
+        }//clears the array and repopulates the table if guest uses passphrase
+    }
 });
