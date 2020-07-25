@@ -74,9 +74,19 @@ $(document).ready(function(){
         };
         //loops to sum all annual salaries in array
 
+        let monthlyTotal = parseInt(annualTotal / 12)
+        //declares monthly total ,rounded, for clarity
+
         $('#monthlyExp').empty();        
-        $('#monthlyExp').append(parseInt(annualTotal / 12));
+        $('#monthlyExp').append(`$ ${monthlyTotal}`);
         //resets text to the monthly total
+
+        if (monthlyTotal>20000 && !$('#monthlyExp').hasClass('expenseThreshold')) {
+            $('#monthlyExp').addClass('expenseThreshold');
+        } else if (monthlyTotal<=20000 && $('#monthlyExp').hasClass('expenseThreshold')) {
+            $('#monthlyExp').removeClass('expenseThreshold');
+        }
+        //checks if value is above 20000 and applies styling as warning
     };
 
     function deleteRow() {
